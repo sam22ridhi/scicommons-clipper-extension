@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body { width: 350px; padding: 15px; font-family: 'Segoe UI', sans-serif; }
+      .field { margin-bottom: 12px; }
+      label { display: block; font-size: 12px; color: #666; margin-bottom: 4px; }
+      input, textarea, select { 
+        width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; 
+        box-sizing: border-box; font-size: 13px;
+      }
+      textarea { height: 80px; resize: vertical; }
+      button {
+        width: 100%; padding: 10px; background: #000; color: #fff; 
+        border: none; border-radius: 4px; cursor: pointer; font-weight: bold;
+      }
+      button:hover { background: #333; }
+      button:disabled { background: #ccc; cursor: not-allowed; }
+      #status { margin-top: 10px; font-size: 12px; text-align: center; }
+      .success { color: green; }
+      .error { color: red; }
+      .hidden { display: none; }
+    </style>
+  </head>
+  <body>
+    <h3>SciCommons Clipper</h3>
+    
+    <div id="loading" class="status">🔍 Detecting Metadata...</div>
+
+    <div id="form" class="hidden">
+      <div class="field">
+        <label>Title</label>
+        <input type="text" id="title" />
+      </div>
+      
+      <div class="field">
+        <label>Abstract</label>
+        <textarea id="abstract"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Authors (Comma separated)</label>
+        <input type="text" id="authors" placeholder="e.g. Suresh Krishna, Samridhi" />
+      </div>
+
+      <input type="hidden" id="article_link" />
+      
+      <div class="field">
+        <label>Submission Type</label>
+        <select id="submission_type">
+          <option value="Public">Public</option>
+          <option value="Private">Private</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Auth Token (Temp for MVP)</label>
+        <input type="password" id="token" placeholder="Paste Bearer Token here..." />
+      </div>
+
+      <button id="submit-btn">Submit to Library</button>
+    </div>
+
+    <div id="status"></div>
+    <script src="popup.js"></script>
+  </body>
+</html>

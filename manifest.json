@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "SciCommons Clipper",
+  "version": "1.0",
+  "description": "Auto-detect article metadata and submit to SciCommons.",
+  "permissions": ["activeTab", "scripting"],
+  "host_permissions": [
+    "http://localhost:8000/*",
+    "https://api.crossref.org/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Clip to SciCommons"
+  }
+}
