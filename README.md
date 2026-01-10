@@ -35,6 +35,17 @@ Since this is an MVP extension, you need to load it into Chrome manually:
 * The extension will save the article and open it in your local SciCommons dashboard.
 
 
+## 🔑 Authentication Setup
+
+To use the extension, you need a valid **Auth Token** from your SciCommons account.
+
+1.  Log in to **SciCommons** (e.g., http://localhost:3000).
+2.  Open the **Developer Tools** (F12 or Right Click -> Inspect).
+3.  Go to the **Application** tab (Chrome) or **Storage** tab (Firefox).
+4.  Expand **Local Storage** -> select the website URL.
+5.  Find the key named `auth-storage` (or similar, depending on your frontend setup).
+6.  Copy the `state.token` value (it will be a long string starting with `eyJ...`).
+7.  Paste this string into the **Auth Token** field in the extension popup.
 
 ## ⚙️ Configuration
 
