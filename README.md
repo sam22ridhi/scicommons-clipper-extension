@@ -37,9 +37,9 @@ Since this is an MVP extension, you need to load it into Chrome manually:
 
 ## 🔑 Authentication Setup
 
-To use the extension, you need a valid **Auth Token** from your SciCommons account.
+To use the extension, you need an Auth Token. You can get this by logging in via the Frontend (checking Network tab) or by generating one via the API Swagger Docs (/api/users/login
 
-### 🔑 How to get your Auth Token (Backend Method)
+### How to get your Auth Token (Backend Method)
 You can generate a token directly via the API:
 
 1. Go to the API Docs: [http://127.0.0.1:8000/api/docs](http://127.0.0.1:8000/api/docs)
