@@ -1,67 +1,189 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <style>
-      body { width: 350px; padding: 15px; font-family: 'Segoe UI', sans-serif; }
-      .field { margin-bottom: 12px; }
-      label { display: block; font-size: 12px; color: #666; margin-bottom: 4px; }
-      input, textarea, select { 
-        width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; 
-        box-sizing: border-box; font-size: 13px;
-      }
-      textarea { height: 80px; resize: vertical; }
-      button {
-        width: 100%; padding: 10px; background: #000; color: #fff; 
-        border: none; border-radius: 4px; cursor: pointer; font-weight: bold;
-      }
-      button:hover { background: #333; }
-      button:disabled { background: #ccc; cursor: not-allowed; }
-      #status { margin-top: 10px; font-size: 12px; text-align: center; }
-      .success { color: green; }
-      .error { color: red; }
-      .hidden { display: none; }
-    </style>
-  </head>
-  <body>
-    <h3>SciCommons Clipper</h3>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SciCommons Clipper</title>
+  <style>
+    :root {
+     
+      --primary: #0f172a;      
+      --primary-hover: #334155; 
+      --bg-color: #ffffff;
+      --text-color: #020817;
+      --muted-bg: #f1f5f9;      
+      --border-color: #e2e8f0;
+      --input-ring: #94a3b8;
+    }
+
+    body { 
+      width: 340px; 
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+      padding: 16px; 
+      background-color: var(--bg-color); 
+      color: var(--text-color); 
+    }
+
     
-    <div id="loading" class="status">🔍 Detecting Metadata...</div>
+    h3 { 
+      margin-top: 0; 
+      padding-bottom: 12px; 
+      font-size: 16px; 
+      font-weight: 600; 
+      border-bottom: 1px solid var(--border-color); 
+      display: flex; 
+      align-items: center; 
+      gap: 8px;
+    }
 
-    <div id="form" class="hidden">
-      <div class="field">
-        <label>Title</label>
-        <input type="text" id="title" />
-      </div>
-      
-      <div class="field">
-        <label>Abstract</label>
-        <textarea id="abstract"></textarea>
-      </div>
+  
+    .field { margin-bottom: 14px; }
+    
+    label { 
+      display: block; 
+      font-size: 13px; 
+      color: #64748b; 
+      margin-bottom: 6px; 
+      font-weight: 500; 
+    }
 
-      <div class="field">
-        <label>Authors (Comma separated)</label>
-        <input type="text" id="authors" placeholder="e.g. Suresh Krishna, Samridhi" />
-      </div>
+    input[type="text"], input[type="password"], textarea, select { 
+      width: 100%; 
+      padding: 9px 12px; 
+      border: 1px solid var(--border-color); 
+      border-radius: 6px; 
+      box-sizing: border-box; 
+      font-size: 13px; 
+      font-family: inherit;
+      outline: none;
+      transition: box-shadow 0.1s;
+    }
 
-      <input type="hidden" id="article_link" />
-      
+    /* Focus State (Ring Effect) */
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.1); 
+    }
+
+    textarea { resize: vertical; min-height: 70px; }
+
+    /* Primary Button */
+    button { 
+      width: 100%; 
+      padding: 10px; 
+      background-color: var(--primary); 
+      color: white; 
+      border: none; 
+      border-radius: 6px; 
+      cursor: pointer; 
+      font-weight: 500; 
+      font-size: 13px;
+      transition: background-color 0.2s; 
+    }
+
+    button:hover { background-color: var(--primary-hover); }
+    button:disabled { background-color: #94a3b8; cursor: not-allowed; }
+
+   
+    #community_section { 
+      background: var(--muted-bg); 
+      padding: 12px; 
+      border-radius: 8px; 
+      border: 1px solid var(--border-color); 
+      margin-bottom: 14px; 
+    }
+
+    
+    .checkbox-group { 
+      display: flex; 
+      align-items: center; 
+      gap: 10px; 
+      margin-bottom: 14px; 
+      padding: 4px 0; 
+    }
+    
+    .checkbox-group input { 
+      width: 16px; 
+      height: 16px; 
+      accent-color: var(--primary); 
+      cursor: pointer;
+    }
+    
+    .checkbox-group label { 
+      margin: 0; 
+      cursor: pointer; 
+      color: var(--text-color);
+    }
+
+    /* Status Messages */
+    #status { 
+      margin-top: 12px; 
+      font-size: 12px; 
+      text-align: center; 
+      min-height: 18px; 
+      font-weight: 500;
+    }
+    .success { color: #16a34a; }
+    .error { color: #dc2626; }
+    .hidden { display: none; }
+    
+    #loading { 
+      text-align: center; 
+      color: #64748b; 
+      font-size: 13px; 
+      margin-top: 20px; 
+    }
+  </style>
+</head>
+<body>
+  <h3>🖇️ SciCommons Clipper</h3>
+
+  <div id="loading">🔍 Detecting Article Metadata...</div>
+
+  <div id="form" class="hidden">
+    <div class="field">
+      <label for="title">Title</label>
+      <input type="text" id="title" placeholder="Article Title" />
+    </div>
+
+    <div class="field">
+      <label for="authors">Authors</label>
+      <input type="text" id="authors" placeholder="e.g. Jane Doe, John Smith" />
+    </div>
+
+    <div class="field">
+      <label for="abstract">Abstract</label>
+      <textarea id="abstract" placeholder="Brief summary..."></textarea>
+    </div>
+
+    <div class="field">
+      <label for="token">Auth Token</label>
+      <input type="password" id="token" placeholder="Paste your JWT Token here" />
+    </div>
+
+    <div class="checkbox-group">
+      <input type="checkbox" id="add_to_community" />
+      <label for="add_to_community">Submit to a Community?</label>
+    </div>
+
+    <div id="community_section" class="hidden">
       <div class="field">
-        <label>Submission Type</label>
+        <label for="community_name">Community Name</label>
+        <input type="text" id="community_name" placeholder="Exact Community Name" />
+      </div>
+      <div class="field">
+        <label for="submission_type">Submission Type</label>
         <select id="submission_type">
           <option value="Public">Public</option>
           <option value="Private">Private</option>
         </select>
       </div>
-
-      <div class="field">
-        <label>Auth Token (Temp for MVP)</label>
-        <input type="password" id="token" placeholder="Paste Bearer Token here..." />
-      </div>
-
-      <button id="submit-btn">Submit to Library</button>
     </div>
 
-    <div id="status"></div>
-    <script src="popup.js"></script>
-  </body>
+    <input type="hidden" id="article_link" />
+    <button id="submit-btn">Submit to Library</button>
+  </div>
+
+  <div id="status"></div>
+  <script src="popup.js"></script>
+</body>
 </html>
