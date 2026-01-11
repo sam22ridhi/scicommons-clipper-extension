@@ -39,13 +39,23 @@ Since this is an MVP extension, you need to load it into Chrome manually:
 
 To use the extension, you need a valid **Auth Token** from your SciCommons account.
 
-1.  Log in to **SciCommons** (e.g., http://localhost:3000).
-2.  Open the **Developer Tools** (F12 or Right Click -> Inspect).
-3.  Go to the **Application** tab (Chrome) or **Storage** tab (Firefox).
-4.  Expand **Local Storage** -> select the website URL.
-5.  Find the key named `auth-storage` (or similar, depending on your frontend setup).
-6.  Copy the `state.token` value (it will be a long string starting with `eyJ...`).
-7.  Paste this string into the **Auth Token** field in the extension popup.
+### 🔑 How to get your Auth Token (Backend Method)
+You can generate a token directly via the API:
+
+1. Go to the API Docs: [http://127.0.0.1:8000/api/docs](http://127.0.0.1:8000/api/docs)
+2. Find the **Users** section and open `POST /api/users/login`.
+3. Click **Try it out**.
+4. Enter your credentials:
+   ```json
+   {
+     "username": "admin",
+     "password": "your_password"
+   }
+5. Then click execute
+6. And auth token is generated you can copy paste that into the the extension
+
+Below is the image
+<img width="2880" height="1556" alt="image" src="https://github.com/user-attachments/assets/14b49291-d320-473b-b402-c07b7395a020" />
 
 ## ⚙️ Configuration
 
